@@ -1,0 +1,13 @@
+version: "3.5"
+services:
+  # NODE
+  postquake:
+    container_name: postquake
+    build:
+      context: .
+      dockerfile: docker/dockerfile.local
+    image: postquake:local
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app/

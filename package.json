@@ -1,0 +1,31 @@
+{
+  "name": "postquake",
+  "version": "0.0.1",
+  "description": "An awesome game for devs",
+  "main": "index.js",
+  "scripts": {
+    "start-dev": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "http-server": "14.1.1",
+    "typescript": "^4.8.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capitanfuturo/postquake.git"
+  },
+  "keywords": [
+    "Phaser",
+    "Typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/capitanfuturo/postquake/issues"
+  },
+  "homepage": "https://github.com/capitanfuturo/postquake#readme",
+  "dependencies": {
+    "phaser": "^3.55.2"
+  }
+}
