@@ -2,14 +2,20 @@
   "name": "postquake",
   "version": "0.0.1",
   "description": "An awesome game for devs",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start-dev": "http-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite --host",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "devDependencies": {
-    "http-server": "14.1.1",
-    "typescript": "^4.8.4"
+    "@types/node": "^17.0.31",
+    "@rollup/plugin-alias": "^3.1.9",
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-replace": "^4.0.0",
+    "phaser": "^3.55.2",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.8"
   },
   "repository": {
     "type": "git",
@@ -24,8 +30,5 @@
   "bugs": {
     "url": "https://github.com/capitanfuturo/postquake/issues"
   },
-  "homepage": "https://github.com/capitanfuturo/postquake#readme",
-  "dependencies": {
-    "phaser": "^3.55.2"
-  }
+  "homepage": "https://github.com/capitanfuturo/postquake#readme"
 }

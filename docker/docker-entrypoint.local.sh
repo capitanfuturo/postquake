@@ -1,2 +1,2 @@
 npm install --no-optional
-npm run start-dev
+npm run dev

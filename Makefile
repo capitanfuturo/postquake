@@ -20,3 +20,10 @@ sh:
 start:
 	docker-compose up -d
 
+##stop: @ stop docker-compose for local development
+stop:
+	docker-compose down
+
+##logs: @ logs docker-compose for local development
+logs:
+	docker-compose logs --follow postquake
