@@ -1,3 +1,7 @@
 import Phaser from "phaser";
 
-new Phaser.Game();
+new Phaser.Game({
+  width: "100%",
+  height: "100%",
+  title: "PostQuake",
+});

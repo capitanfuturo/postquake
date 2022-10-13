@@ -1,8 +1,20 @@
-import { defineConfig } from "vite";
+import { ConfigEnv, defineConfig, UserConfig } from "vite";
 import replace from "@rollup/plugin-replace";
 
-export default defineConfig({
-  build: {
+export default defineConfig(({ command }: ConfigEnv) => {
+  const configs: UserConfig = {};
+
+  if (command === "serve") {
+    configs.logLevel = "info";
+    // TODO set local .env
+  }
+  if (command === "build") {
+    configs.logLevel = "error";
+    // TODO set production .env
+  }
+
+  // build options
+  configs.build = {
     rollupOptions: {
       plugins: [
         //  Toggle the booleans here to enable / disable Phaser 3 features:
@@ -16,5 +28,10 @@ export default defineConfig({
         }),
       ],
     },
-  },
+  };
+
+  // environments dir
+  configs.envDir = "./environments";
+
+  return configs;
 });
