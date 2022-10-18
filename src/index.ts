@@ -15,11 +15,17 @@ export default class PostQuake extends Phaser.Scene {
 
   bombs: any;
 
+  private velocityX: number;
+  private velocityY: number;
+
   constructor() {
     super("PostQuake");
   }
 
-  init() {}
+  init() {
+    this.velocityX = 800;
+    this.velocityY = 500;
+  }
 
   preload() {
     this.load.image("sky", "./assets/sky.png");
@@ -87,7 +93,7 @@ export default class PostQuake extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.player.body.setGravityY(50);
+    this.player.body.setGravityY(500);
     this.physics.add.collider(this.player, this.platforms);
 
     this.physics.add.overlap(
@@ -153,11 +159,11 @@ export default class PostQuake extends Phaser.Scene {
   update(time: number, delta: number): void {
     const cursors = this.input.keyboard.createCursorKeys();
     if (cursors.left.isDown) {
-      this.player.setVelocityX(-300);
+      this.player.setVelocityX(-this.velocityX);
 
       this.player.anims.play("left", true);
     } else if (cursors.right.isDown) {
-      this.player.setVelocityX(300);
+      this.player.setVelocityX(this.velocityX);
 
       this.player.anims.play("right", true);
     } else {
@@ -166,8 +172,16 @@ export default class PostQuake extends Phaser.Scene {
     }
 
     if (cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
+      this.player.setVelocityY(-this.velocityY);
     }
+  }
+
+  public setVelocityX(velocity: number) {
+    this.velocityX = velocity;
+  }
+
+  public setVelocityY(velocity: number) {
+    this.velocityY = velocity;
   }
 }
 
