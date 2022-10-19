@@ -15,6 +15,10 @@ export default class PostQuake extends Phaser.Scene {
 
   bombs: any;
 
+  button: any;
+
+  music: any;
+
   private velocityX: number;
   private velocityY: number;
 
@@ -23,8 +27,8 @@ export default class PostQuake extends Phaser.Scene {
   }
 
   init() {
-    this.velocityX = 400;
-    this.velocityY = 500;
+    this.velocityX = 600;
+    this.velocityY = 800;
   }
 
   preload() {
@@ -35,6 +39,11 @@ export default class PostQuake extends Phaser.Scene {
     this.load.spritesheet("developer", "./assets/developer.png", {
       frameWidth: 70,
       frameHeight: 85,
+    });
+    this.load.audio("theme_audio", ["./assets/audio/space.mp3"]);
+    this.load.spritesheet("revive_button", "assets/revive-button.png", {
+      frameWidth: 193,
+      frameHeight: 71,
     });
   }
 
@@ -75,7 +84,10 @@ export default class PostQuake extends Phaser.Scene {
 
     this.anims.create({
       key: "left",
-      frames: this.anims.generateFrameNumbers("developer", { start: 0, end: 3 }),
+      frames: this.anims.generateFrameNumbers("developer", {
+        start: 0,
+        end: 3,
+      }),
       frameRate: 10,
       repeat: -1,
     });
@@ -88,7 +100,10 @@ export default class PostQuake extends Phaser.Scene {
 
     this.anims.create({
       key: "right",
-      frames: this.anims.generateFrameNumbers("developer", { start: 5, end: 8 }),
+      frames: this.anims.generateFrameNumbers("developer", {
+        start: 5,
+        end: 8,
+      }),
       frameRate: 10,
       repeat: -1,
     });
@@ -121,6 +136,19 @@ export default class PostQuake extends Phaser.Scene {
       undefined,
       this
     );
+
+    // music
+    this.music = this.sound.add("theme_audio").play();
+
+    // buttons
+    this.button = this.add
+      .text(100, 100, "Restart", { fill: "#0f0" })
+      .setInteractive()
+      .on("pointerdown", () => {
+        this.sound.removeAll();
+        this.scene.restart();
+        console.log("click");
+      });
   }
 
   private collectStar(player, star) {
@@ -185,7 +213,7 @@ export default class PostQuake extends Phaser.Scene {
   }
 }
 
-const config = {
+const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
   backgroundColor: "#125555",
   width: 800,
