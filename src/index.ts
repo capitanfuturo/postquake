@@ -23,7 +23,7 @@ export default class PostQuake extends Phaser.Scene {
   }
 
   init() {
-    this.velocityX = 800;
+    this.velocityX = 400;
     this.velocityY = 500;
   }
 
@@ -33,8 +33,8 @@ export default class PostQuake extends Phaser.Scene {
     this.load.image("star", "./assets/star.png");
     this.load.image("bomb", "./assets/bomb.png");
     this.load.spritesheet("developer", "./assets/developer.png", {
-      frameWidth: 41,
-      frameHeight: 50,
+      frameWidth: 70,
+      frameHeight: 85,
     });
   }
 
