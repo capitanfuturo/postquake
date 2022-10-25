@@ -24,6 +24,9 @@ start:
 stop:
 	docker-compose down
 
+##restart: @ restart
+restart: stop start logs
+
 ##logs: @ logs docker-compose for local development
 logs:
 	docker-compose logs --follow postquake
