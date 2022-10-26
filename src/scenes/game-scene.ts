@@ -1,11 +1,11 @@
-export default class Game extends Phaser.Scene {
+import { EVENT_SCORE_CHANGED, KEY_SCORE, SCENE_GAME } from "./constants";
+
+export default class GameScene extends Phaser.Scene {
   private platforms?: Phaser.Physics.Arcade.StaticGroup;
 
   private player?: Phaser.Physics.Arcade.Sprite;
 
   score: number = 0;
-
-  scoreText: any;
 
   gameOver = false;
 
@@ -21,7 +21,7 @@ export default class Game extends Phaser.Scene {
   private velocityY: number;
 
   constructor() {
-    super("PostQuake");
+    super({ key: SCENE_GAME });
   }
 
   init() {
@@ -117,11 +117,6 @@ export default class Game extends Phaser.Scene {
       this
     );
 
-    this.scoreText = this.add.text(16, 16, "score: 0", {
-      fontSize: "32px",
-      color: "#000",
-    });
-
     // BOMBS
     this.bombs = this.physics.add.group();
 
@@ -153,7 +148,8 @@ export default class Game extends Phaser.Scene {
     star.disableBody(true, true);
 
     this.score += 10;
-    this.scoreText.setText("Score: " + this.score);
+    this.registry.values.KEY_SCORE = this.score;
+    this.events.emit(EVENT_SCORE_CHANGED);
 
     if (this.stars.countActive(true) === 0) {
       this.stars.children.iterate(function (child) {
