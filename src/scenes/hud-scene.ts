@@ -1,33 +1,42 @@
 import {
   EVENT_SCORE_CHANGED,
-  KEY_SCORE,
+  REGISTRY_KEY_SCORE,
   SCENE_GAME,
-  SCENE_HUD,
-} from "./constants";
+  SCENE_HUD
+} from './constants';
 
 export default class HudScene extends Phaser.Scene {
-  private textElements?: Map<string, Phaser.GameObjects.BitmapText>;
+  private textElements?: Map<string, Phaser.GameObjects.Text>;
 
   constructor() {
     super({ key: SCENE_HUD });
   }
 
   create(): void {
+    const level = this.scene.get(SCENE_GAME);
+
     this.textElements = new Map([
-      [KEY_SCORE, this.addText(40, 8, `${this.registry.get(KEY_SCORE)}`)],
+      [
+        REGISTRY_KEY_SCORE,
+        this.addText(
+          40,
+          8,
+          this.getScoreText(this.registry.get(REGISTRY_KEY_SCORE))
+        )
+      ]
     ]);
-    // [KEY_TIME, this.addText(136, 8, `${this.registry.get(KEY_TIME)}`)]
+
+    // buttons
+    this.add
+      .text(100, 100, 'Restart', { color: '#0f0' })
+      .setInteractive()
+      .on('pointerdown', () => {
+        this.sound.removeAll();
+        this.scene.restart();
+      });
 
     // create events
-    const level = this.scene.get(SCENE_GAME);
     level.events.on(EVENT_SCORE_CHANGED, this.updateScore, this);
-    // add timer
-    // this.timer = this.time.addEvent({
-    //   delay: 1000,
-    //   callback: this.updateTime,
-    //   callbackScope: this,
-    //   loop: true,
-    // });
   }
 
   private addText(
@@ -36,21 +45,19 @@ export default class HudScene extends Phaser.Scene {
     value: string
   ): Phaser.GameObjects.Text {
     return this.add.text(x, y, value, {
-      fontSize: "32px",
-      color: "#000",
+      fontSize: '32px',
+      color: '#000'
     });
   }
 
-  // private updateTime() {
-  //   this.registry.values.time -= 1;
-  //   this.textElements.get(KEY_TIME).setText(`${this.registry.get(KEY_TIME)}`);
-  // }
-
   private updateScore() {
-    const registryScore = this.registry.get(KEY_SCORE);
+    const registryScore = this.registry.get(REGISTRY_KEY_SCORE);
     this.textElements
-      .get(KEY_SCORE)
-      .setText(`Score: ${registryScore}`)
-      .setX(40 - 8 * (registryScore.toString().length - 1));
+      ?.get(REGISTRY_KEY_SCORE)
+      ?.setText(this.getScoreText(registryScore));
+  }
+
+  private getScoreText(score: number): string {
+    return `Score: ${score}`;
   }
 }

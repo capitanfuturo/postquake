@@ -1,4 +1,9 @@
-import { KEY_SCORE, SCENE_BOOT, SCENE_GAME, SCENE_HUD } from "./constants";
+import {
+  REGISTRY_KEY_SCORE,
+  SCENE_BOOT,
+  SCENE_GAME,
+  SCENE_HUD,
+} from "./constants";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -18,6 +23,6 @@ export class BootScene extends Phaser.Scene {
   }
 
   private initRegistry(): void {
-    this.registry.set(KEY_SCORE, 0);
+    this.registry.set(REGISTRY_KEY_SCORE, 0);
   }
 }
