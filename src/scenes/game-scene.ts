@@ -106,7 +106,8 @@ export default class Game extends Phaser.Scene {
       repeat: -1,
     });
 
-    this.player.body.setGravityY(500);
+    const body = this.player.body as Phaser.Physics.Arcade.Body;
+    body.setGravityY(500);
     this.physics.add.collider(this.player, this.platforms);
 
     this.physics.add.overlap(
