@@ -26,22 +26,6 @@ export default class GameScene extends Phaser.Scene {
     super({ key: SCENE_GAME });
   }
 
-  preload() {
-    this.load.image('sky', './assets/sky.png');
-    this.load.image('ground', './assets/platform.png');
-    this.load.image('star', './assets/star.png');
-    this.load.image('bomb', './assets/bomb.png');
-    this.load.spritesheet('developer', './assets/developer.png', {
-      frameWidth: 70,
-      frameHeight: 85
-    });
-    this.load.audio('theme_audio', ['./assets/audio/space.mp3']);
-    this.load.spritesheet('revive_button', 'assets/revive-button.png', {
-      frameWidth: 193,
-      frameHeight: 71
-    });
-  }
-
   create() {
     this.add.image(400, 300, 'sky');
 

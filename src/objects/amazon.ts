@@ -1,6 +1,6 @@
-import { Action, FRAME_DEVELOPER, Key } from '../scenes/constants';
+import { Action, FRAME_AMAZON, Key } from '../scenes/constants';
 
-export class Developer extends Phaser.Physics.Arcade.Sprite {
+export class Amazon extends Phaser.Physics.Arcade.Sprite {
   private VELOCITY_X = 350;
   private VELOCITY_Y = 350;
 
@@ -9,7 +9,7 @@ export class Developer extends Phaser.Physics.Arcade.Sprite {
   private velocityY = this.VELOCITY_Y;
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
-    super(scene, x, y, FRAME_DEVELOPER);
+    super(scene, x, y, FRAME_AMAZON);
     this.initSprite();
     this.scene.add.existing(this);
   }
@@ -24,7 +24,7 @@ export class Developer extends Phaser.Physics.Arcade.Sprite {
     // animation
     this.anims.create({
       key: Action.LEFT,
-      frames: this.anims.generateFrameNumbers(FRAME_DEVELOPER, {
+      frames: this.anims.generateFrameNumbers(FRAME_AMAZON, {
         start: 0,
         end: 3
       }),
@@ -34,13 +34,13 @@ export class Developer extends Phaser.Physics.Arcade.Sprite {
 
     this.anims.create({
       key: Action.TURN,
-      frames: [{ key: FRAME_DEVELOPER, frame: 4 }],
+      frames: [{ key: FRAME_AMAZON, frame: 4 }],
       frameRate: 20
     });
 
     this.anims.create({
       key: Action.RIGHT,
-      frames: this.anims.generateFrameNumbers(FRAME_DEVELOPER, {
+      frames: this.anims.generateFrameNumbers(FRAME_AMAZON, {
         start: 5,
         end: 8
       }),
