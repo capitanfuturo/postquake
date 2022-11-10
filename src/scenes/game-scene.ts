@@ -34,6 +34,9 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("ground", "./assets/platform.png");
     this.load.image("star", "./assets/star.png");
     this.load.image("bomb", "./assets/bomb.png");
+    this.load.image('tiles', './assets/BasicGreen.png');
+    // Load the export Tiled JSON
+    this.load.tilemapTiledJSON('map', './assets/map.json');
     this.load.spritesheet("developer", "./assets/developer.png", {
       frameWidth: 70,
       frameHeight: 85,
@@ -47,20 +50,23 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
     this.add.image(400, 300, "sky");
-
+    const map = this.make.tilemap({ key: 'map' });
+    const tileset = map.addTilesetImage('BasicGreen', 'tiles');
+    const platforms = map.createLayer('Platforms', tileset, 0, 0);
+    platforms.setCollisionByExclusion([-1], true);
     // PLATFORM
-    this.platforms = this.physics.add.staticGroup();
+    // this.platforms = this.physics.add.staticGroup();
 
     /*
      * The call to refreshBody() is required because we have scaled
      * a static physics body, so we have to tell the physics world
      * about the changes we made
      */
-    this.platforms.create(400, 568, "ground").setScale(2).refreshBody();
+    // this.platforms.create(400, 568, "ground").setScale(2).refreshBody();
 
-    this.platforms.create(600, 400, "ground");
-    this.platforms.create(50, 250, "ground");
-    this.platforms.create(750, 220, "ground");
+    // this.platforms.create(600, 400, "ground");
+    // this.platforms.create(50, 250, "ground");
+    // this.platforms.create(750, 220, "ground");
 
     // STARS
     this.stars = this.physics.add.group({
@@ -107,7 +113,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.player.body.setGravityY(500);
-    this.physics.add.collider(this.player, this.platforms);
+    this.physics.add.collider(this.player, platforms);
 
     this.physics.add.overlap(
       this.player,
